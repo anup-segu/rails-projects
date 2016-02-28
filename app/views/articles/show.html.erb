@@ -19,11 +19,17 @@
 <h3>Comments (<%= @article.comments.size %>)</h3>
 <%= render partial: 'articles/comment', collection: @article.comments %>
 
-<%= render partial: 'comments/form' %>
-
-<%= link_to "edit", edit_article_path(@article) %>
-
-<%= link_to "delete", article_path(@article), method: :delete, 
-data: {confirm:  "Really delete the article?"}%>
+<% if logged_in? %>
+  <%= render partial: 'comments/form' %>
+  
+  <%= link_to "edit", edit_article_path(@article) %>
+  
+  <%= link_to "delete", article_path(@article), method: :delete, 
+  data: {confirm:  "Really delete the article?"}%>
+<% else %>
+  <p>
+    Login to post comments or edit article
+  </p>
+<% end %>
 
 <%= link_to "<< Back to Articles List", articles_path %>
