@@ -1,0 +1,20 @@
+<form action = "/session" method = "Post">
+  <input
+    type="hidden"
+    name="authenticity_token"
+    value="<%= form_authenticity_token %>">
+
+  <label name= "user[user_name]">User Name:</label>
+  <input type="text" name= "user[user_name]"><br>
+
+  <label name= "user[password]">Password:</label>
+  <input type="password" name= "user[password]"><br>
+
+  <input type="submit" value="Log In">
+</form>
+
+<% if @user.errors.any? %>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+<% end %>
