@@ -1,0 +1,39 @@
+<% if flash[:owner_error] %>
+      <h3><%= flash[:owner_error] %><br></h3>
+<% end %>
+
+<h1><%= @cat.name %></h1>
+
+<table>
+  <tr>
+    <th>Attribute</th>
+    <th>Value</th>
+  </tr>
+  <% [:age, :birth_date, :color, :sex].each do |attr_name| %>
+    <tr>
+      <td><%= attr_name %></td>
+      <td><%= @cat.send(attr_name) %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to "Edit #{@cat.name}", edit_cat_url(@cat) %>
+<br>
+<%= link_to "All Cats", cats_url %>
+
+<h2>Rental Requests</h2>
+<table>
+  <tr>
+    <th>Start Date</th>
+    <th>End Date</th>
+    <th>Status</th>
+    <th>Requester</th>
+  </tr>
+  <% @cat.rental_requests.order("start_date").includes(:requester).each do |req| %>
+    <%= render "req_tr", req: req, is_owner: is_owner? %>
+  <% end %>
+</table>
+
+<% unless is_owner? %>
+  <%= link_to "Rent this cat", new_cat_rental_request_url(@cat) %>
+<% end  %>
