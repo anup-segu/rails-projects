@@ -31,7 +31,7 @@ class UsersController < ApplicationController
 
     if @user.save
       login!(@user)
-      redirect_to users_url
+      redirect_to bands_url
     else
       flash.now[:errors] = @user.errors.full_messages
       render :new
@@ -56,10 +56,8 @@ class UsersController < ApplicationController
   # DELETE /users/1.json
   def destroy
     @user.destroy
-    respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    flash[:notice] = "User account was deleted"
+    redirect_to new_user_url
   end
 
   private

@@ -1,4 +1,5 @@
 class AlbumsController < ApplicationController
+  before_action :require_login
   before_action :find_album, only: [:edit, :update, :destroy, :show]
 
   def new

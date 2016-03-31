@@ -1,4 +1,5 @@
 class TracksController < ApplicationController
+  before_action :require_login
   before_action :track_find, only: [:edit, :update, :show, :destroy]
 
   def new
