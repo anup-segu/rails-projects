@@ -1,5 +1,10 @@
 <h1><%= @band.name %></h1>
 
+<h4>All Albums</h4>
+<%= render 'albums', band: @band %>
+
+<br>
+
 <%= link_to 'edit this band', edit_band_url(@band) %>
 <br>
 <%= link_to 'back to band index', bands_url %>

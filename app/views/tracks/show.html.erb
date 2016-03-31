@@ -1,0 +1,12 @@
+<h1><%= @track.name %></h1>
+
+<p>
+  <h4>Band: <%= @track.album.band.name%></h4>
+  <h4>Album: <%= @track.album.name%> | <%= @track.ttype %> track </h4>
+</p>
+
+<h4>Track Lyrics</h4>
+<br>
+<p><%= @track.lyrics %></p>
+
+<%= link_to 'Edit Track', edit_track_url(@track) %>
