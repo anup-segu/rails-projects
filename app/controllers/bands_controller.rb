@@ -1,4 +1,5 @@
 class BandsController < ApplicationController
+  before_action :require_login
   before_action :find_band, only: [:edit, :update, :destroy, :show]
   def index
     @bands = Band.all
