@@ -1,4 +1,5 @@
 class BandsController < ApplicationController
+  before_action :find_band, only: [:edit, :update, :destroy, :show]
   def index
     @bands = Band.all
     render :index
@@ -6,10 +7,11 @@ class BandsController < ApplicationController
 
   def new
     @band = Band.new
+    render :new
   end
 
   def show
-    @band = Band.find_by(id: params[:id])
+    render :show
   end
 
   def create
@@ -25,12 +27,10 @@ class BandsController < ApplicationController
   end
 
   def edit
-    @band = Band.find(params[:id])
+    render :edit
   end
 
   def update
-    @band = Band.find(params[:id])
-
     if @band.update_attributes(band_params)
       flash[:notice] = "#{@band.class} successfully updated!"
       redirect_to band_url(@band)
@@ -40,9 +40,18 @@ class BandsController < ApplicationController
     end
   end
 
+  def destroy
+    @band.delete
+    redirect_to bands_url
+  end
+
   private
 
   def band_params
     params.require(:band).permit(:name)
+  end
+
+  def find_band
+    @band = Band.find(params[:id])
   end
 end
