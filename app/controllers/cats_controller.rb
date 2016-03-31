@@ -1,6 +1,7 @@
 class CatsController < ApplicationController
   helper_method :is_owner?
   before_action :validate_owner, only: [:edit, :update]
+  before_action :already_logged_in, only: [:index]
 
   def index
     @cats = Cat.all
@@ -60,4 +61,5 @@ class CatsController < ApplicationController
     @cat = Cat.find(params[:id])
     @cat.user_id == current_user.id
   end
+
 end

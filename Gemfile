@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'geocoder'
 gem 'annotate'
 gem 'bcrypt'
 gem 'coffee-rails', '~> 4.0.0'
