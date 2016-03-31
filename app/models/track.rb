@@ -4,4 +4,7 @@ class Track < ActiveRecord::Base
   validates :ttype, inclusion: { in: TRACK_TYPES }
 
   belongs_to :album
+  has_one :band,
+    through: :album,
+    source: :band
 end

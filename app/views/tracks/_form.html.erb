@@ -44,12 +44,14 @@
     <br>
   <% end %>
   <br>
+
   <label for="track_lyrics">Track Lyrics</label>
-  <input
+  <br>
+  <textarea
     id="track_lyrics"
     name="track[lyrics]"
-    type="textarea"
-    value="<%= track.lyrics %>" >
+    rows="5"
+    value="<%= track.lyrics %>" ></textarea>
   <br>
 
   <br>

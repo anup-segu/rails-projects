@@ -1,8 +1,9 @@
 class TracksController < ApplicationController
-  before_action :track_find, only: [:edit, :update, :show]
+  before_action :track_find, only: [:edit, :update, :show, :destroy]
 
   def new
     @track = Track.new
+    @track.album_id = params[:album_id]
     render :new
   end
 
@@ -23,6 +24,14 @@ class TracksController < ApplicationController
   end
 
   def show
+    render :show
+  end
+
+  def destroy
+    album = @track.album
+    @track.destroy
+    flash[:notice] = "The track was deleted"
+    redirect_to album_url(album)
   end
 
   def update
@@ -37,7 +46,7 @@ class TracksController < ApplicationController
 
   private
   def track_params
-    params.require(:track).permit(:name, :album_id, :ttype)
+    params.require(:track).permit(:name, :album_id, :ttype, :lyrics)
   end
 
   def track_find

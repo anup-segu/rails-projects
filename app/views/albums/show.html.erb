@@ -6,7 +6,16 @@
 
 <p><%= @album.ttype %> album</p>
 
-<%= link_to "edit album", edit_album_url(@album) %>
+<p>
+  <h4>Tracks</h4>
+  <%= render 'tracks', album: @album %>
+</p>
+
+<%= button_to "add track", new_album_track_url(@album), method: :get %>
+<br>
+<%= button_to "edit album", edit_album_url(@album), method: :get %>
+<br>
+<%= button_to "delete album", album_url(@album), method: :delete %>
 <br>
 <%= link_to "back to #{@album.band.name}", band_url(@album.band) %>
 <br>

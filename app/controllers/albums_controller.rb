@@ -1,6 +1,9 @@
 class AlbumsController < ApplicationController
+  before_action :find_album, only: [:edit, :update, :destroy, :show]
+
   def new
     @album = Album.new
+    @album.band_id = params[:band_id]
     render :new
   end
 
@@ -17,18 +20,14 @@ class AlbumsController < ApplicationController
   end
 
   def show
-    @album = Album.find(params[:id])
     render :show
   end
 
   def edit
-    @album = Album.find(params[:id])
     render :edit
   end
 
   def update
-    @album = Album.find(params[:id])
-    
     if @album.update_attributes(album_params)
       flash[:notice] = "#{@album.class} succesfully updated!"
       redirect_to album_url(@album)
@@ -38,9 +37,20 @@ class AlbumsController < ApplicationController
     end
   end
 
+  def destroy
+    band = @album.band
+    @album.destroy
+    flash[:notice] = "The album was deleted"
+    redirect_to band_url(band)
+  end
+
   private
 
   def album_params
     params.require(:album).permit(:name, :band_id, :ttype)
+  end
+
+  def find_album
+    @album = Album.find(params[:id])
   end
 end
