@@ -1,0 +1,6 @@
+<h5>Posted by: <%= note.author.email %> | Posted at: <%= note.created_at %></h5>
+<p>--------------------------------------</p>
+<p><%= note.body %></p>
+<p>--------------------------------------</p>
+<%= button_to 'delete note', note_url(note), method: :delete %>
+<br>

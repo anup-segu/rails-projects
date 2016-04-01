@@ -12,6 +12,11 @@
 <br>
 <%= button_to 'Delete Track', track_url(@track), method: :delete %>
 <br>
+<h4>User Notes</h4>
+<%= render 'notes', track: @track %>
+<br>
+<%= button_to 'Add Note', new_track_note_url(@track), method: :get %>
+<br>
 <%= link_to 'Back to Album', album_url(@track.album) %>
 <br>
 <%= link_to 'Back to Band', band_url(@track.band) %>
