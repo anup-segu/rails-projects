@@ -1,0 +1,5 @@
+<h1>Post a Note</h1>
+
+<%= render 'form', note: @note %>
+<br>
+<%= link_to 'back to track', track_url(@note.track_id) %>
