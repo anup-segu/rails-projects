@@ -1,33 +1,34 @@
 <h1>All Goals</h1>
-<table>
-  <tr>
-    <th>
-    Goal title:
-    </th>
-    <th>
-      Cheers:
-    </th>
-    <th>
-      Add Cheer!
-    </th>
-  </tr>
-  <% @goals.each do |goal| %>
-      <tr>
-        <td>
-          <%= link_to goal.title, goal_url(goal)%>
-        </td>
-        <td>
-          <%= goal.cheers.length %>
-        </td>
-        <td>
-          <form action="<%= cheers_url %>" method="post" >
-            <%= render 'shared/auth_token' %>
-            <input type="hidden" name="cheer[goal_id]" value="<%= goal.id %>">
-            <input type="submit" value="👍" />
-          </form>
-        </td>
-      </tr>
-  <% end %>
-</table>
-
+<div class="leaderboard">
+  <table>
+    <tr>
+      <th>
+      Goal title:
+      </th>
+      <th>
+        Cheers:
+      </th>
+      <th>
+        Add Cheer!
+      </th>
+    </tr>
+    <% @goals.each do |goal| %>
+        <tr>
+          <td>
+            <%= link_to goal.title, goal_url(goal)%>
+          </td>
+          <td>
+            <%= goal.cheers.length %>
+          </td>
+          <td>
+            <form action="<%= cheers_url %>" method="post" >
+              <%= render 'shared/auth_token' %>
+              <input type="hidden" name="cheer[goal_id]" value="<%= goal.id %>">
+              <input type="submit" value="👍" />
+            </form>
+          </td>
+        </tr>
+    <% end %>
+  </table>
+</div>
 <%= button_to 'Add Goal', new_goal_url, method: :get %>

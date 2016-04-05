@@ -13,3 +13,18 @@
  *= require_tree .
  *= require_self
  */
+body {
+  text-align: center;
+  font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
+h1 {
+  color: navy;
+}
+table {
+  border: 2px solid cadetblue;
+  text-align: center;
+  background-color: aliceblue;
+}
+th, td {
+  width: 125px;
+}
