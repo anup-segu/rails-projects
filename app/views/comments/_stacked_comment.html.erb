@@ -3,9 +3,9 @@
   > <%= comment.content  %> <%= link_to 'View', comment_url(comment) %>
 <br>
 <ul>
-  <% comment.child_comments.each do |child| %>
+  <% post.all_comments_by_parent_id[comment.id].each do |child| %>
     <li>
-      <%= render 'comments/stacked_comment', comment: child %>
+      <%= render 'comments/stacked_comment', comment: child, post: post %>
     </li>
   <% end %>
 </ul>

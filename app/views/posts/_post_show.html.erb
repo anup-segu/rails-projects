@@ -1,0 +1,13 @@
+<h2><%= post.title %></h2>
+
+<p><%= post.content %></p>
+<h4>Comments</h4>
+
+<ul>
+  <% post.all_comments_by_parent_id[nil].each do |comment| %>
+    <li>
+      <%= render 'comments/stacked_comment', comment: comment, post: post %>
+    </li>
+    <br>
+  <% end %>
+</ul>

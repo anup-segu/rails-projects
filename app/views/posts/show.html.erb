@@ -1,16 +1,4 @@
-<h2><%= @post.title %></h2>
-
-<p><%= @post.content %></p>
-<h4>Comments</h4>
-
-<ul>
-  <% @post.comments.where(parent_comment_id: nil).each do |comment| %>
-    <li>
-      <%= render 'comments/stacked_comment', comment: comment %>
-    </li>
-    <br>
-  <% end %>
-</ul>
+<%= render 'posts/post_show', post: @post %>
 
 <%= render 'comments/form', post: @post %>
 <br>

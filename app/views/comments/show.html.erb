@@ -1,4 +1,4 @@
-<%= render 'comments/stacked_comment', comment: @comment %>
+<%= render 'comments/stacked_comment', comment: @comment, post: Post.find(@comment.post_id) %>
 <br>
 <h3>Respond</h3>
 <form action="<%= comments_url %>" method="post">
