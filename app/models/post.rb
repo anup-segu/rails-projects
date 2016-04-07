@@ -1,6 +1,6 @@
 class Post < ActiveRecord::Base
   include Votable
-  
+
   validates :title, :author_id, presence: true
   # validate :ensure_sub
 
@@ -26,6 +26,11 @@ class Post < ActiveRecord::Base
     all_comments.each do |comment|
       ordered_comments[comment.parent_comment_id] << comment
     end
+
+    ordered_comments.each do |parent_id, comments|
+      comments.sort! {|c1, c2| c2.votes <=> c1.votes }
+    end
+
     ordered_comments
   end
 

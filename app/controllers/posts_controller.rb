@@ -129,7 +129,7 @@ class PostsController < ApplicationController
       )
     end
 
-    redirect_to sub_url(@post.sub_id)
+    redirect_to sub_url(@post.subs.first)
   end
 
 end

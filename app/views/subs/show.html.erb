@@ -4,7 +4,7 @@
 <p>Moderator: <%= @sub.moderator.username %></p>
 
 
-<% @sub.posts.each do |post| %>
+<% @sub.posts_by_votes.each do |post| %>
   <%= render 'posts/post_show.html.erb', post: post %>
   <p>----------------------------</p>
 <% end %>

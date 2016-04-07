@@ -14,4 +14,8 @@ class Sub < ActiveRecord::Base
     source: :post
 
 
+  def posts_by_votes
+    self.posts.sort { |p1, p2| p2.votes <=> p1.votes }
+  end
+
 end
