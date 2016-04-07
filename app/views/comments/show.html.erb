@@ -1,0 +1,20 @@
+<%= render 'comments/stacked_comment', comment: @comment %>
+<br>
+<h3>Respond</h3>
+<form action="<%= comments_url %>" method="post">
+  <input
+    type="hidden"
+    name="authenticity_token"
+    value="<%= form_authenticity_token %>">
+
+  <input type="hidden" name="comment[post_id]" value="<%= @comment.post_id %>">
+
+  <input type="hidden" name="comment[parent_comment_id]" value="<%= @comment.id %>">
+
+  <textarea name="comment[content]"></textarea>
+  <br>
+
+  <input type='submit' value='Add Comment'>
+</form>
+
+<%= link_to 'Back to Post', sub_url(@comment.post_id) %>

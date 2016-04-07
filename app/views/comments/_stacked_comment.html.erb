@@ -1,0 +1,11 @@
+<%= comment.author.username %> posted on <%= comment.created_at %>
+  <br>
+  > <%= comment.content  %> <%= link_to 'View', comment_url(comment) %>
+<br>
+<ul>
+  <% comment.child_comments.each do |child| %>
+    <li>
+      <%= render 'comments/stacked_comment', comment: child %>
+    </li>
+  <% end %>
+</ul>

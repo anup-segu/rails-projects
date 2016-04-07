@@ -1,0 +1,28 @@
+<h1> <%= @sub.title %></h1>
+
+<p><%= @sub.description %></p>
+<p>Moderator: <%= @sub.moderator.username %></p>
+
+<%#= render 'posts' %>
+
+<% @sub.posts.each do |post| %>
+  <%= link_to post.title, post_url(post) %>
+  <br>
+  <p><%= post.content %></p>
+  <ul>
+    <% post.comments.where(parent_comment_id: nil).each do |comment| %>
+      <%= render 'comments/stacked_comment', comment: comment %>
+      <br>
+    <% end %>
+  </ul>
+
+<% end %>
+
+
+<%= button_to 'Add Post', new_sub_post_url(@sub), method: :get %>
+<br>
+
+<%= button_to 'Edit', edit_sub_path(@sub), method: :get %>
+<br>
+<%= button_to "Delete", sub_url(@sub), method: :delete %>
+<%= link_to 'Back', subs_url %>
