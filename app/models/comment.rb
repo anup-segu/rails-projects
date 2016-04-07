@@ -1,4 +1,6 @@
 class Comment < ActiveRecord::Base
+  include Votable
+  
   validates :author_id, :post_id, :content, presence: true
 
   belongs_to :author,

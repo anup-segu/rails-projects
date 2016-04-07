@@ -85,6 +85,14 @@ class PostsController < ApplicationController
     redirect_to sub_url(sub)
   end
 
+  def upvote
+    vote(1)
+  end
+
+  def downvote
+    vote(-1)
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_post
@@ -101,6 +109,27 @@ class PostsController < ApplicationController
       flash[:errors] = ["You are not the author!"]
       redirect_to post_url(@post)
     end
+  end
+
+  def vote(direction)
+    set_post
+
+    @uservote = Uservote.find_by(
+      votable_id: @post.id,
+      votable_type: "Post",
+      user_id: current_user.id
+    )
+
+    if @uservote
+      @uservote.update(value: direction)
+    else
+      @post.uservotes.create!(
+        user_id: current_user.id,
+        value: direction
+      )
+    end
+
+    redirect_to sub_url(@post.sub_id)
   end
 
 end

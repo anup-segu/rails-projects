@@ -29,6 +29,14 @@ class CommentsController < ApplicationController
     render :show
   end
 
+  def upvote
+    vote(1)
+  end
+
+  def downvote
+    vote(-1)
+  end
+
   private
   def comment_params
     params.require(:comment).permit(:post_id, :content, :parent_comment_id)
@@ -43,5 +51,26 @@ class CommentsController < ApplicationController
       flash[:errors] = ["You are not the author!"]
       redirect_to post_url(@comment.post_id)
     end
+  end
+
+  def vote(direction)
+    set_comment
+
+    @uservote = Uservote.find_by(
+      votable_id: @comment.id,
+      votable_type: "Comment",
+      user_id: current_user.id
+    )
+
+    if @uservote
+      @uservote.update(value: direction)
+    else
+      @comment.uservotes.create!(
+        user_id: current_user.id,
+        value: direction
+      )
+    end
+
+    redirect_to post_url(@comment.post_id)
   end
 end

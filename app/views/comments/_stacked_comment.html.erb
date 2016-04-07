@@ -1,7 +1,9 @@
 <%= comment.author.username %> posted on <%= comment.created_at %>
   <br>
-  > <%= comment.content  %> <%= link_to 'View', comment_url(comment) %>
+  > (<%= comment.votes %>) <%= comment.content  %> <%= link_to 'View', comment_url(comment) %>
 <br>
+<%= button_to 'Upvote', upvote_comment_url(comment), method: :post %>
+<%= button_to 'Downvote', downvote_comment_url(comment), method: :post %>
 <ul>
   <% post.all_comments_by_parent_id[comment.id].each do |child| %>
     <li>

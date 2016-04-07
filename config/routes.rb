@@ -1,10 +1,20 @@
 Rails.application.routes.draw do
-  resources :posts, only: [:new, :create, :destroy, :edit, :update, :show]
+  resources :posts, only: [:new, :create, :destroy, :edit, :update, :show] do
+    member do
+      post "downvote"
+      post "upvote"
+    end
+  end
   resources :subs do
     resources :posts, only: [:new]
   end
   resources :users
-  resources :comments, only: [:create, :destroy, :show]
+  resources :comments, only: [:create, :destroy, :show] do
+    member do
+      post "downvote"
+      post "upvote"
+    end
+  end
   resource :session, only: [:new, :create, :destroy]
 
   root to: 'subs#index'
