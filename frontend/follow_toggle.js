@@ -11,25 +11,40 @@ var FollowToggle = function (el) {
 };
 
 FollowToggle.prototype.render = function () {
-  if (this.followState === "unfollowed") {
-    var buttonMessage = "Follow!";
-  } else {
-    buttonMessage = "Unfollow!";
+  switch (this.followState){
+    case "unfollowed":
+      var buttonMessage = "Follow!";
+      this.$el.prop("disabled", false);
+      break;
+    case "followed":
+      buttonMessage = "Unfollow!";
+      this.$el.prop("disabled", false);
+      break;
+    case "following":
+      buttonMessage = "Following Now!";
+      this.$el.prop("disabled", true);
+      break;
+    case "unfollowing":
+      buttonMessage = "GoodBye Forever!";
+      this.$el.prop("disabled", true);
+      break;
   }
+
 
   this.$el.text(buttonMessage);
 };
 
 FollowToggle.prototype.handleClick = function (e) {
   var that = this;
-  // var url = "/users/"+ this.userID +"/follow";
-  // e.preventDefault();
-  console.log("handled");
+
   if (this.followState === "unfollowed") {
+    this.followState = "following";
     var method = "POST";
-  } else {
+  } else if (this.followState === "followed") {
+    this.followState = "unfollowing";
     method = "DELETE";
   }
+  this.render();
 
   $.ajax({
     method: method,
