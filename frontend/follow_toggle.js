@@ -1,13 +1,11 @@
-var FollowToggle = function (el) {
+var FollowToggle = function (el, options) {
   this.$el = $(el);
-  this.userID = this.$el.attr("data-user-id");
-  this.followState = this.$el.attr("data-initial-follow-state");
+  this.userID = this.$el.attr("data-user-id") || options.userID;
+  this.followState = this.$el.attr("data-initial-follow-state") || options.followState;
   this.render();
 
-  var that = this;
-  this.$el.on("click", function(){
-    that.handleClick();
-  });
+  this.$el.on("click", this.handleClick.bind(this));
+
 };
 
 FollowToggle.prototype.render = function () {
@@ -36,6 +34,7 @@ FollowToggle.prototype.render = function () {
 
 FollowToggle.prototype.handleClick = function (e) {
   var that = this;
+  e.preventDefault();
 
   if (this.followState === "unfollowed") {
     this.followState = "following";
