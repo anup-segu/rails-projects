@@ -1,0 +1,7 @@
+<ul>
+  <% parent.comments.each do |comment| %>
+    <li>
+      <%= comment.body %> <%= button_to "Delete comment", comment_url(comment), method: :delete %>
+    </li>
+  <% end %>
+</ul>
