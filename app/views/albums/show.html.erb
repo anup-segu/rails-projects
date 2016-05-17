@@ -1,0 +1,22 @@
+<h1><%= @album.name %></h1>
+
+<p>
+  <h4>Band: <%= @album.band.name %></h4>
+</p>
+
+<p><%= @album.ttype %> album</p>
+
+<p>
+  <h4>Tracks</h4>
+  <%= render 'tracks', album: @album %>
+</p>
+
+<%= button_to "add track", new_album_track_url(@album), method: :get %>
+<br>
+<%= button_to "edit album", edit_album_url(@album), method: :get %>
+<br>
+<%= button_to "delete album", album_url(@album), method: :delete %>
+<br>
+<%= link_to "back to #{@album.band.name}", band_url(@album.band) %>
+<br>
+<%= link_to "back to band index", bands_url %>

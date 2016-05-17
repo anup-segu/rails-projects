@@ -1,0 +1,10 @@
+<% unless logged_in? %>
+  <p>
+    <%= link_to "Sign In", new_session_url %> or
+    <%= link_to "Sign Up", new_user_url %>
+  </p>
+<% else %>
+  <p> <%=  "Welcome, #{current_user.email}" %>
+    <%= button_to "Logout", session_url, method: :delete %>
+  </p>
+<% end %>
