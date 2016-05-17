@@ -1,0 +1,17 @@
+<h2>(<%= post.votes %>) <%= link_to post.title, post_url(post) %></h2>
+
+<p><%= post.content %></p>
+
+<p><%= button_to 'Upvote', upvote_post_url(post), method: :post %>
+  <%= button_to 'Downvote', downvote_post_url(post), method: :post %></p>
+
+<h4>Comments</h4>
+
+<ul>
+  <% post.all_comments_by_parent_id[nil].each do |comment| %>
+    <li>
+      <%= render 'comments/stacked_comment', comment: comment, post: post %>
+    </li>
+    <br>
+  <% end %>
+</ul>

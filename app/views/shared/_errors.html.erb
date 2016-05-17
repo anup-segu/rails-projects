@@ -1,0 +1,12 @@
+
+<% unless flash[:errors].nil? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(flash[:errors].count, "error") %>(s) occurred:</h2>
+
+    <ul>
+    <% flash[:errors].each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>

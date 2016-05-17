@@ -1,0 +1,5 @@
+<% @sub.posts.each do |post| %>
+  <%= link_to, post.title, post_url(post) %>
+  <br>
+  <%= post.content %>
+<% end %>
