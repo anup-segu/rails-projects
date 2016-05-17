@@ -1,0 +1,33 @@
+<% action_url = (goal.persisted? ? goal_url(goal) : goals_url) %>
+<% metodo = (goal.persisted? ? "patch" : "post") %>
+
+<form action="<%= action_url %>" method="post">
+  <%= render 'shared/auth_token' %>
+  <input type="hidden" name="_method" value="<%= metodo %>">
+
+  <label for="Title">Title</label>
+  <input id="Title" type="text" name="goal[title]" value="<%= goal.title %>">
+  <br />
+  <label for="goal_description">Description</label>
+  <br />
+  <textarea
+    name="goal[description]"
+    id="goal_description"><%= goal.description %></textarea>
+  <br />
+  <label for="goal_progress">Progress</label>
+  <select name="goal[progress]" id="goal_progress">
+    <% Goal::STATUS.each do |status| %>
+      <option value="<%= status %>" <%= "selected" if goal.progress == status %>><%= status %></option>
+    <% end %>
+  </select>
+  <br />
+
+  <label for="goal[private]">Privacy Setting: </label><br />
+  <label for="goal_private_t">Private</label>
+  <input type="radio" name="goal[private]" id="goal_private_t" value="Private" />
+  <label for="goal_private_f">Public</label>
+  <input type="radio" name="goal[private]" id="goal_private_f" value="Public" />
+  <br />
+
+  <input type="submit" value="Set Goal!" />
+</form>
