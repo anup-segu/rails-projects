@@ -1,0 +1,10 @@
+<h3>Add Comment: </h3>
+<form action="<%= comments_url %>" method="post">
+  <%= render 'shared/auth_token' %>
+  <input type="hidden" name="comment[commentable_id]" value="<%= parent.id %>">
+  <input type="hidden" name="comment[commentable_type]" value="<%= parent.class %>">
+
+  <textarea id="comment_body" name="comment[body]">Type your comments here</textarea>
+  <br />
+  <input type="submit" value="Submit Post" />
+</form>
