@@ -1,0 +1,33 @@
+<% action = (note.persisted? ? note_url(note) : notes_url) %>
+<% method = (note.persisted? ? :patch : :post) %>
+<% message = (note.persisted? ? "Update Note" : "Create Note") %>
+
+<form action="<%= action %>" method="post">
+  <input name="_method" type="hidden" value="<%= method %>">
+  <input
+    name="authenticity_token"
+    type="hidden"
+    value="<%= form_authenticity_token %>">
+  <label for="note_track">Track ID</label>
+  <br>
+  <input
+    id="note_track"
+    name="note[track_id]"
+    type="text"
+    value="<%= note.track_id %>">
+  <br>
+
+  <label for="note_body">Enter Text Here</label>
+  <br>
+
+  <textarea
+    id="note_body"
+    name="note[body]"
+    rows="5"
+    value="<%= note.body %>" ></textarea>
+  <br>
+  <br>
+
+  <input type="submit" value="<%= message %>">
+
+</form>

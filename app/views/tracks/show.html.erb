@@ -1,0 +1,22 @@
+<h1><%= @track.name %></h1>
+
+<p>
+  <h4>Band: <%= @track.album.band.name%></h4>
+  <h4>Album: <%= @track.album.name%> | <%= @track.ttype %> track </h4>
+</p>
+
+<h4>Track Lyrics</h4>
+<p><%= @track.lyrics %></p>
+
+<%= button_to 'Edit Track', edit_track_url(@track), method: :get %>
+<br>
+<%= button_to 'Delete Track', track_url(@track), method: :delete %>
+<br>
+<h4>User Notes</h4>
+<%= render 'notes', track: @track %>
+<br>
+<%= button_to 'Add Note', new_track_note_url(@track), method: :get %>
+<br>
+<%= link_to 'Back to Album', album_url(@track.album) %>
+<br>
+<%= link_to 'Back to Band', band_url(@track.band) %>

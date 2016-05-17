@@ -1,0 +1,7 @@
+<h1>Edit <%= @track.name %></h1>
+
+<%= render 'form', track: @track %>
+
+<%= link_to 'Back to Track', track_url(@track) %>
+<%= link_to 'Back to Album', album_url(@track.album) %>
+<%= link_to 'Back to Band', band_url(@track.band) %>

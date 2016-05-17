@@ -1,0 +1,5 @@
+<h1> Edit <%= @band.name %></h1>
+<br>
+<%= render 'form', band: @band %>
+<br>
+<%= link_to 'back to band index', band_url(@band) %>
